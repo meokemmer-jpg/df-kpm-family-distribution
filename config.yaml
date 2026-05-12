@@ -1,0 +1,145 @@
+# DF-KPM-Family-Distribution Configuration [CRUX-MK]
+df_id: df-kpm-family-distribution
+df_name: KPM-Family-Distribution
+welle_introduced: welle-42
+type: foundation-df
+version: 0.1.0-PHASE-1
+status: PHASE-1-SCAFFOLD
+crux-mk: true
+
+k0_touch: true
+k0_caveats:
+  - "Familien-Vermoegens-Allokation pro Mitglied (MAX K_0)"
+  - "Cape-Coral-Coupling (Wegzugsbesteuerung-Pre-Calc)"
+  - "Brueder + Eltern (Q_0-Domain Familie)"
+  - "STRIKT Sandbox-Default mit Mock-Familie"
+  - "Cross-LLM-3OF3 + Martin-Phronesis pro Real-Mode"
+
+phronesis_required: true
+sandbox_default: true
+
+description: |
+  Familien-Verteilungs-Logic fuer Kemmer-Familien-Vermoegen.
+  Mitglieder + Liquiditaetsbedarf + Cape-Coral-Wegzugsbesteuerung-Tracker.
+  Sandbox-Default mit Mock-Familie (Martin+Gerdi+1 Bruder).
+
+cascade_isolation: hard
+failure_blast_radius: 0
+output_feeds_into_training: false
+external_anchor_type: market_data_feed
+concurrent_spawn_protection: both
+lock_dir: /tmp/df-kpm-family-distribution.lock
+
+tier_2_check:
+  lambda_per_month_estimate: 30
+  narrow_scope: "Familien-Mitglieder-Allokation + Liquiditaetsbedarf-Tracking + Wegzugsbesteuerung-Pre-Calc"
+  determinism: 0.95
+  rollback_seconds: 30
+  test_coverage_target: 0.85
+  k0_protected: true
+  q0_measurable: true
+  escalation_after_n_fails: 3
+  rho_budget_eur_day: 0
+  audit_trail: branch-hub/audit/df-kpm-family-distribution.jsonl
+
+k11_cascade_containment:
+  cascade_isolation: hard
+  failure_blast_radius: 0
+  dependency_dlq_strategy: "Per-Familienmitglied eigene DLQ + jsonl-Backup"
+
+k12_distillation_resistenz:
+  output_feeds_into_training: false
+  provenance_required_in_output: true
+  non_llm_validation_layer: rule-based-allocation-validator
+
+k13_independent_ground_truth:
+  external_anchor_type: market_data_feed
+  external_anchor_validation_frequency: "daily NAV + monthly Wegzugsbesteuerung-Recalc"
+  pre_action_domain_check:
+    env_tag: "sandbox/dev/staging/prod"
+    mount_point: "sqlite-db Path"
+    network_region: "Market-Data + Tax-API Endpoints"
+  pre_action_backup_check:
+    backup_status: "previous Allocation-Snapshot konsistent?"
+    replication_lag: "n/a"
+  pre_action_blast_radius_check:
+    blast_radius: "ein Daily-Allocation-Snapshot pro Familienmitglied"
+    reversibility_class: "state-only (Allocation-Historie append-only)"
+
+k14_human_override_decay:
+  override_complexity: single_command
+  override_documentation_freshness_days: 30
+  martin_review_cadence: "monthly Allocation-Review + sofort bei Liquiditaets-Trigger"
+  bus_factor_handover_drilled: false
+
+k15_entropy_budget:
+  entropy_added_loc_estimate: 800
+  entropy_added_concepts:
+    - FamilyMember
+    - AllocationShare
+    - LiquidityNeed
+    - WegzugsbesteuerungSnapshot
+    - CapeCoralCouplingState
+  entropy_justified_by_rho: "+EUR 60k/Jahr durch Strukturierte-Familien-Allokation + Wegzugsbesteuerung-Pre-Calc"
+  entropy_subtractive_potential: "ersetzt manuelle Excel-Familien-Tracking"
+
+k16_concurrent_spawn_mutex:
+  concurrent_spawn_protection: both
+  lock_dir: /tmp/df-kpm-family-distribution.lock
+  lock_stale_age_h: 6
+  engine_pgrep_check: true
+  lock_release_on: EXIT_INT_TERM
+
+lose_coupling:
+  LC1_graceful_degradation:
+    degradation_modes:
+      - full
+      - degraded_no_market_data
+      - sandbox_mock
+    degradation_test_required: true
+  LC2_direct_mode:
+    direct_mode_available: true
+    direct_mode_capability: 0.7
+    direct_mode_trigger: "market_data_feed unreachable >30s OR Phronesis-Ticket missing"
+  LC3_circuit_breaker:
+    circuit_breaker_timeout_s: 30
+    circuit_breaker_open_threshold: 3
+    circuit_breaker_half_open_test_interval_s: 300
+  LC4_failure_isolation:
+    state_externalization: true
+    idempotent_operations: true
+    dependency_dlq_separate: true
+  LC5_health_check:
+    health_check_dependencies: [market_data_feed]
+    health_check_degraded_score: 0.6
+    health_check_endpoint_or_file: "/tmp/df-kpm-family-distribution-health.json"
+
+operations:
+  output_path: ~/Projects/dark-factories/df-kpm-family-distribution/
+  sqlite_db_path: ~/.df-kpm-family-distribution/state.db
+  jsonl_backup_path: branch-hub/audit/df-kpm-family-distribution.jsonl
+  stop_flag_path: /tmp/df-kpm-family-distribution.stop
+  health_file_path: /tmp/df-kpm-family-distribution-health.json
+
+env_vars:
+  DF_KPM_FAMILY_DIST_REAL_ENABLED:
+    default: false
+    description: "Real-Mode (true=live family-allocation, default=mock)"
+  PHRONESIS_TICKET:
+    required_when: DF_KPM_FAMILY_DIST_REAL_ENABLED=true
+
+rho_estimate:
+  annual_eur: 60000
+  reason: "Strukturierte Familien-Allokation + Wegzugsbesteuerung-Pre-Calc (Cape-Coral-Coupling)"
+  schwer_quantifizierbar: false
+
+dependencies_phase_2:
+  - df-kpm-portfolio-tracker
+  - df-kpm-rebalance-engine
+  - df-kpm-drawdown-monitor
+
+crux_bindung:
+  K_0: "MAXIMAL geschuetzt (Familien-Vermoegen-Allokation Sandbox + Wegzugsbesteuerung-Pre-Calc)"
+  Q_0: "Familien-Domain (Brueder + Eltern + Cape-Coral-Coupling) explizit modelliert"
+  I_min: "Strukturierte Familienmitglied-Tracking + Liquiditaetsbedarf"
+  W_0: "Martin-Bandbreite minimiert (Pre-Calc statt Manual-Excel)"

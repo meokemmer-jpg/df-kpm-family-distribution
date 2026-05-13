@@ -7,6 +7,25 @@ version: 0.1.0-PHASE-1
 status: PHASE-1-SCAFFOLD
 crux-mk: true
 
+default_action:
+  description: "KPM Familien-Vermoegens-Allokations-Empfehlung pro Mitglied (MAX K_0+Q_0 Domain) - Cape-Coral-Coupling Wegzugsbesteuerung-Pre-Calc + Brueder/Eltern-Allocation (STRIKT Empfehlungs-only, Sandbox-Default)"
+  rho_per_run_eur: 150
+  rho_validation_source: unvalidated
+  block_gates:
+    - gate_id: K13_PAV
+      block_reason: "Pre-Action-Verification HARD-PFLICHT bei K_0+Q_0-Direct: Mock-Familie-Default + Sandbox-Pflicht + KEIN Real-Familienmitglieds-Touch ohne Martin-Phronesis-Approval-Pro-Ausfuehrung"
+      false_block_cost_eur: 130
+      legitimate_block_condition: "Real-Familienmitglieds-Daten-Verwendung ohne expliziten Martin-Approval pro Run ODER Production-Mode ohne PHRONESIS_TICKET"
+    - gate_id: K14
+      block_reason: "Human-Override-Decay: Martin muss JEDEN Run reviewen koennen (no auto-batch)"
+      false_block_cost_eur: 100
+      legitimate_block_condition: "Auto-Batch-Mode ohne pro-Run-Martin-Review-Pflicht ODER override_complexity > single_command"
+    - gate_id: K11
+      block_reason: "Cascade-Containment: Family-Distribution-Fail darf KEINEN Brueder-Kohaesion-Risk triggern"
+      false_block_cost_eur: 80
+      legitimate_block_condition: "Distribution-Fail ODER Q_0-Brueder-Risk-Trigger detected"
+  graceful_degradation_path: "Sandbox-Empfehlungs-only mit Mock-Familie (Kemmer-Mock-Profile) + Q_0-Risk-Detection-Layer aktiv"
+
 k0_touch: true
 k0_caveats:
   - "Familien-Vermoegens-Allokation pro Mitglied (MAX K_0)"

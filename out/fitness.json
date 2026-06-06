@@ -1,0 +1,8 @@
+{
+  "df": "df-kpm-family-distribution",
+  "ts": "2026-06-05T10:53:10.670650+00:00",
+  "ok": true,
+  "bytes": 2014,
+  "model": "qwen2.5:14b-instruct",
+  "duration_s": 37.4
+}

@@ -1,9 +1,9 @@
 {
   "df": "df-kpm-family-distribution",
-  "ts": "2026-06-08T00:07:14.277449+00:00",
+  "ts": "2026-06-09T02:29:29.446359+00:00",
   "ok": true,
-  "bytes": 4995,
-  "model": "kemmer-70b-ctx8k",
+  "bytes": 4122,
+  "model": "kemmer-14b-ctx8k",
   "mode": "produce",
-  "duration_s": 410.9
+  "duration_s": 37.9
 }

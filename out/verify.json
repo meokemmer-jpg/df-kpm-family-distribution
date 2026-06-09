@@ -1,0 +1,12 @@
+{
+  "df": "df-kpm-family-distribution",
+  "ts": "2026-06-08T19:55:03.490226+00:00",
+  "has_src": true,
+  "parse_ok": true,
+  "has_tests": true,
+  "test_ran": true,
+  "tests_passed": true,
+  "code_hash": "c1928f21c688190e",
+  "python": "3.14.4",
+  "crux": "[CRUX-MK]"
+}

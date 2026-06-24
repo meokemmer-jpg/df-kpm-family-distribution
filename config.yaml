@@ -162,3 +162,8 @@ crux_bindung:
   Q_0: "Familien-Domain (Brueder + Eltern + Cape-Coral-Coupling) explizit modelliert"
   I_min: "Strukturierte Familienmitglied-Tracking + Liquiditaetsbedarf"
   W_0: "Martin-Bandbreite minimiert (Pre-Calc statt Manual-Excel)"
+K13_external_anchor_type: verified_web_sources
+K13_external_anchor_validation_frequency: per_anchor_run
+K13_external_anchor_count: 2
+K13_external_anchor_evidence: https://www.bundesbank.de/de/aufgaben/geldpolitik/zinssaetze/zinssaetze-604558
+K13_anchored_ts: 2026-06-23T08:57:49.192236+00:00

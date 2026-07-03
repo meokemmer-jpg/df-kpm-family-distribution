@@ -1,9 +1,9 @@
 {
   "df": "df-kpm-family-distribution",
-  "ts": "2026-07-03T00:49:18.209362+00:00",
+  "ts": "2026-07-03T02:53:31.361032+00:00",
   "maturity": "TESTED",
   "maturity_level": 4,
   "evidence_grade": 4,
-  "wargame_verdict": null,
+  "wargame_verdict": "CONDITIONAL",
   "crux": "[CRUX-MK]"
 }

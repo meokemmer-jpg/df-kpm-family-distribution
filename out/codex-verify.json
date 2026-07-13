@@ -1,0 +1,6 @@
+{
+  "verdict": "HOLDS",
+  "reason": "Der Test fuehrt den echten Orchestrator mit zwei unterschiedlichen JSON-Payloads aus und prueft, dass adversariale Zielanteile/Transition/Liquiditaet zu anderen Allokationen und einer anderen Risikoentscheidung fuehren.",
+  "ts": "2026-07-12T14:44:48.453393+00:00",
+  "attempts": 1
+}
